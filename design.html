@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MD. NASIR UDDIN - Portfolio</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         body {
-            font-family: 'Hind Siliguri', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;
             color: #333;
-            line-height: 1.6;
+            line-height: 1.7;
         }
         .container {
             max-width: 1000px;
@@ -26,29 +26,30 @@
         header {
             text-align: center;
             padding-bottom: 20px;
-            border-bottom: 2px solid #007bff;
+            border-bottom: 2px solid #0056b3;
         }
         header h1 {
             margin: 0;
-            font-size: 2.5em;
-            color: #0056b3;
+            font-size: 2.8em;
+            color: #004a99;
         }
         header p {
             font-size: 1.2em;
             margin-top: 5px;
             color: #555;
+            font-weight: 500;
         }
         section {
-            padding: 20px 0;
+            padding: 25px 0;
             border-bottom: 1px solid #e0e0e0;
         }
         section:last-of-type {
             border-bottom: none;
         }
         h2 {
-            font-size: 1.8em;
+            font-size: 2em;
             color: #0056b3;
-            border-bottom: 2px solid #eee;
+            border-bottom: 2px solid #f0f0f0;
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
@@ -57,15 +58,20 @@
             padding: 0;
         }
         ul li {
-            background-color: #eef7ff;
-            padding: 10px 15px;
+            background-color: #f0f8ff;
+            padding: 12px 18px;
             margin-bottom: 8px;
             border-radius: 5px;
             border-left: 4px solid #007bff;
+            transition: background-color 0.3s;
+        }
+        ul li:hover {
+            background-color: #e0f0ff;
         }
         .skills-container {
             display: flex;
             justify-content: space-between;
+            gap: 20px;
         }
         .skills-container div {
             width: 48%;
@@ -73,7 +79,7 @@
         #portfolio .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
         .project-card {
             background: #fff;
@@ -91,10 +97,10 @@
             width: 100%;
             height: 220px;
             object-fit: cover;
-            background-color: #ccc; /* Placeholder color */
+            background-color: #e9ecef;
         }
         .project-card .project-info {
-            padding: 15px;
+            padding: 20px;
         }
         .project-card h3 {
             margin-top: 0;
@@ -102,30 +108,30 @@
         }
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             margin-top: 20px;
-            background-color: #0056b3;
+            background-color: #004a99;
             color: #fff;
             border-radius: 0 0 10px 10px;
         }
         footer p {
-            margin: 5px 0;
+            margin: 8px 0;
         }
         footer a {
             color: #fff;
             text-decoration: none;
             font-weight: bold;
+            border-bottom: 1px dotted #fff;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #a9d4ff;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .skills-container {
-                flex-direction: column;
-            }
-            .skills-container div {
-                width: 100%;
-                margin-bottom: 20px;
-            }
+            header h1 { font-size: 2.2em; }
+            .skills-container { flex-direction: column; }
+            .skills-container div { width: 100%; }
         }
     </style>
 </head>
@@ -133,32 +139,32 @@
 
     <div class="container">
         <header>
-            <h1>মোঃ নাসির উদ্দিন</h1>
-            <p>রেজিস্টার্ড নার্স ও ক্রিয়েটিভ গ্রাফিক্স ডিজাইনার</p>
+            <h1>MD. NASIR UDDIN</h1>
+            <p>Registered Nurse & Creative Graphic Designer</p>
         </header>
 
         <section id="about">
-            <h2>আমার সম্পর্কে</h2>
-            <p>আমি মোঃ নাসির উদ্দিন। পেশাগত জীবনে আমি একজন রেজিস্টার্ড নার্স এবং সৃজনশীল জগতে একজন গ্রাফিক্স ডিজাইনার। দুটি ভিন্ন জগৎ হলেও আমার কাজের মূলমন্ত্র একই—সূক্ষ্মতা, যত্ন এবং মানুষের প্রয়োজনকে গুরুত্ব দেওয়া। আমার লক্ষ্য হলো, ব্র্যান্ড বা ব্যবসাকে তাদের কাঙ্ক্ষিত লক্ষ্যে পৌঁছাতে সাহায্য করা এবং দৃষ্টিনন্দন ও কার্যকরী ডিজাইন তৈরি করা।</p>
+            <h2>About Me</h2>
+            <p>I am Md. Nasir Uddin, a Registered Nurse by profession and a Graphic Designer by passion. While these two worlds may seem different, my work is guided by the same core principles: <strong>precision, care, and a deep understanding of human needs</strong>. Nursing has taught me patience, meticulous attention to detail, and empathy—qualities I bring to every design project. I believe a great design doesn't just look good; it tells a story and connects with its audience. My goal is to help brands achieve their vision with designs that are both beautiful and effective.</p>
         </section>
 
         <section id="services">
-            <h2>আমার সেবাসমূহ</h2>
+            <h2>Services I Offer</h2>
             <ul>
-                <li>লোগো ডিজাইন ও ব্র্যান্ডিং</li>
-                <li>ফ্লায়ার, ব্রোশিউর ও পোস্টার ডিজাইন</li>
-                <li>সোশ্যাল মিডিয়া গ্রাফিক্স (ফেসবুক, ইনস্টাগ্রাম)</li>
-                <li>বিজ্ঞাপন ডিজাইন</li>
-                <li>টি-শার্ট ডিজাইন</li>
-                <li>ফটো এডিটিং ও রিটাচিং</li>
+                <li>Logo Design & Brand Identity</li>
+                <li>Flyers, Brochures & Posters</li>
+                <li>Social Media Graphics (Facebook, Instagram, etc.)</li>
+                <li>Advertisement & Web Banner Design</li>
+                <li>Custom T-Shirt Design</li>
+                <li>Photo Editing & Retouching</li>
             </ul>
         </section>
         
         <section id="skills">
-            <h2>আমার দক্ষতা</h2>
+            <h2>My Skills</h2>
             <div class="skills-container">
                 <div>
-                    <h3>সফটওয়্যার</h3>
+                    <h3>Software</h3>
                     <ul>
                         <li>Adobe Illustrator</li>
                         <li>Adobe Photoshop</li>
@@ -168,61 +174,62 @@
                     </ul>
                 </div>
                 <div>
-                    <h3>পেশাগত দক্ষতা</h3>
+                    <h3>Professional Skills</h3>
                     <ul>
-                        <li>সৃজনশীলতা (Creativity)</li>
-                        <li>সূক্ষ্ম বিষয়ে মনোযোগ (Attention to Detail)</li>
-                        <li>যোগাযোগ (Communication)</li>
-                        <li>সময় ব্যবস্থাপনা (Time Management)</li>
+                        <li>Creativity & Innovation</li>
+                        <li>Attention to Detail</li>
+                        <li>Effective Communication</li>
+                        <li>Time Management & Deadlines</li>
+                        <li>Problem Solving</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <section id="portfolio">
-            <h2>আমার নির্বাচিত ডিজাইন</h2>
+            <h2>Selected Works</h2>
             <div class="portfolio-grid">
-                <!-- প্রজেক্ট ১ -->
+                <!-- Project 1 -->
                 <div class="project-card">
-                    <!-- আপনার ডিজাইন করা ছবিটি এখানে দিন। যেমন: images/project1.jpg -->
-                    <img src="https://via.placeholder.com/400x250/007bff/ffffff?text=হেলথকেয়ার+ব্র্যান্ডিং" alt="হেলথকেয়ার ব্র্যান্ডিং">
+                    <img src="https://via.placeholder.com/400x250/007bff/ffffff?text=Healthcare+Branding" alt="Healthcare Branding Project">
                     <div class="project-info">
-                        <h3>হেলথকেয়ার ব্র্যান্ডের জন্য লোগো</h3>
-                        <p>MediCare নামক একটি অনলাইন স্বাস্থ্যসেবা প্ল্যাটফর্মের জন্য বিশ্বাস ও আধুনিকতার মিশ্রণে তৈরি লোগো ও ব্র্যান্ডিং।</p>
+                        <h3>Healthcare Brand Logo</h3>
+                        <p>A minimalist logo and branding concept for 'MediCare,' an online health platform, symbolizing trust, healing, and technology.</p>
                     </div>
                 </div>
-                <!-- প্রজেক্ট ২ -->
+                <!-- Project 2 -->
                 <div class="project-card">
-                    <img src="https://via.placeholder.com/400x250/28a745/ffffff?text=সোশ্যাল+মিডিয়া+ক্যাম্পেইন" alt="সোশ্যাল মিডিয়া ক্যাম্পেইন">
+                    <img src="https://via.placeholder.com/400x250/28a745/ffffff?text=Social+Media+Campaign" alt="Social Media Campaign Project">
                     <div class="project-info">
-                        <h3>রেস্টুরেন্টের জন্য সোশ্যাল মিডিয়া ক্যাম্পেইন</h3>
-                        <p>Sultans Dine রেস্টুরেন্টের জন্য রমজান মাস উপলক্ষে আকর্ষণীয় সোশ্যাল মিডিয়া পোস্ট ও ব্যানার ডিজাইন।</p>
+                        <h3>Restaurant Social Media Campaign</h3>
+                        <p>Vibrant social media posts and banners designed for 'Sultan's Dine' restaurant for a festive promotional campaign.</p>
                     </div>
                 </div>
-                <!-- প্রজেক্ট ৩ -->
+                <!-- Project 3 -->
                 <div class="project-card">
-                     <img src="https://via.placeholder.com/400x250/dc3545/ffffff?text=ব্রোশিউর+ডিজাইন" alt="ব্রোশিউর ডিজাইন">
+                     <img src="https://via.placeholder.com/400x250/dc3545/ffffff?text=Brochure+Design" alt="Brochure Design Project">
                     <div class="project-info">
-                        <h3>কর্পোরেট ব্রোশিউর ডিজাইন</h3>
-                        <p>একটি রিয়েল এস্টেট কোম্পানির জন্য পরিচ্ছন্ন লেআউটে তৈরি তথ্যবহুল ট্রাই-ফোল্ড ব্রোশিউর।</p>
+                        <h3>Corporate Brochure Design</h3>
+                        <p>A clean and informative tri-fold brochure for a real estate company, designed to showcase their latest project effectively.</p>
                     </div>
                 </div>
-                 <!-- প্রজেক্ট ৪ -->
+                 <!-- Project 4 -->
                  <div class="project-card">
-                    <img src="https://via.placeholder.com/400x250/ffc107/000000?text=টি-শার্ট+ডিজাইন" alt="টি-শার্ট ডিজাইন">
+                    <img src="https://via.placeholder.com/400x250/ffc107/000000?text=T-Shirt+Design" alt="T-Shirt Design Project">
                    <div class="project-info">
-                       <h3>সৃজনশীল টি-শার্ট ডিজাইন</h3>
-                       <p>বাংলা টাইপোগ্রাফি এবং মজার উক্তি ব্যবহার করে তরুণদের জন্য আধুনিক টি-শার্ট ডিজাইন।</p>
+                       <h3>Creative T-Shirt Design</h3>
+                       <p>Modern and witty t-shirt designs for a youth-oriented brand, focusing on creative typography and cultural references.</p>
                    </div>
                </div>
             </div>
         </section>
 
         <footer>
-            <h2>যোগাযোগ</h2>
-            <p>ইমেইল: <a href="mailto:nasir.design@email.com">nasir.design@email.com</a></p> <!-- আপনার ইমেইল দিন -->
-            <p>মোবাইল: +880 1XXXXXXXXX</p> <!-- আপনার মোবাইল নম্বর দিন -->
-            <p>Behance: <a href="#">behance.net/yourprofile</a></p> <!-- আপনার Behance লিংক দিন -->
+            <h2>Contact Me</h2>
+            <p>Ready to bring your ideas to life? Let's connect.</p>
+            <p>Email: <a href="mailto:your.email@example.com">nasir.design@email.com</a></p>
+            <p>Phone: +880 1XXXXXXXXX</p>
+            <p>Behance: <a href="#" target="_blank">behance.net/yourprofile</a></p>
         </footer>
 
     </div>
