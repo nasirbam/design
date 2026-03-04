@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DESIGN BD — Creative Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f0e8;
+    --accent: #ff3c00;
+    --accent2: #ffd000;
+    --gray: #1e1e1e;
+    --muted: #555;
+    --border: #2a2a2a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 4px;
+    color: var(--white);
+    cursor: pointer;
+  }
+
+  .logo span { color: var(--accent); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  nav a:hover { color: var(--white); }
+
+  .nav-admin-btn {
+    background: var(--accent);
+    color: var(--white) !important;
+    padding: 8px 20px;
+    border-radius: 2px;
+    font-weight: 600 !important;
+  }
+
+  .nav-admin-btn:hover { background: #e03500; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(120px, 20vw, 280px);
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: 20px;
+    z-index: 0;
+  }
+
+  .hero-content { position: relative; z-index: 1; }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 10vw, 140px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+  }
+
+  h1 em {
+    color: var(--accent);
+    font-style: normal;
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 48px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--white);
+    padding: 14px 36px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: #e03500; transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 14px 36px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { border-color: var(--white); }
+
+  .hero-stats {
+    position: absolute;
+    right: 48px;
+    bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    z-index: 1;
+  }
+
+  .stat { text-align: right; }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 1;
+    animation: bounce 2s infinite;
+  }
+
+  .scroll-hint span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .scroll-hint svg { color: var(--muted); }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 120px 48px; }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 64px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 32px;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 80px);
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .section-count {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+  }
+
+  /* ── PORTFOLIO GRID ── */
+  #portfolio { background: var(--black); }
+
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 8px 20px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2px;
+  }
+
+  .portfolio-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--gray);
+  }
+
+  .portfolio-item .thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+  }
+
+  .portfolio-item:hover .thumb { transform: scale(1.07); }
+
+  .item-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+  }
+
+  .portfolio-item:hover .item-overlay { opacity: 1; }
+
+  .item-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: rgba(255,255,255,0.08);
+    position: absolute;
+    top: 16px;
+    right: 20px;
+  }
+
+  .item-category {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .item-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .item-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .item-btn {
+    padding: 7px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-dl { background: var(--accent); color: var(--white); }
+  .btn-dl:hover { background: #e03500; }
+  .btn-drive { background: rgba(255,255,255,0.1); color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+  .btn-drive:hover { background: rgba(255,255,255,0.2); }
+
+  /* ── PLACEHOLDER IMAGES (SVG) ── */
+  .img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.08);
+    transition: transform 0.5s ease;
+  }
+
+  .portfolio-item:hover .img-placeholder { transform: scale(1.07); }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--gray);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    padding: 120px 48px;
+  }
+
+  .about-img {
+    position: relative;
+    aspect-ratio: 3/4;
+    background: var(--border);
+    overflow: hidden;
+  }
+
+  .about-img-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    color: rgba(255,255,255,0.04);
+    letter-spacing: 10px;
+  }
+
+  .about-img::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--accent);
+    z-index: -1;
+  }
+
+  .about-text .section-label { margin-bottom: 8px; }
+
+  .about-text h2 { margin-bottom: 24px; }
+
+  .about-desc {
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 1rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+
+  .skills-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .skill-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--black); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+
+  .contact-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+
+  .contact-info p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .contact-links { display: flex; flex-direction: column; gap: 12px; }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-link:hover { color: var(--white); }
+
+  .contact-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-field label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .form-field input, .form-field textarea {
+    background: var(--gray);
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 12px 16px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+
+  .form-field input:focus, .form-field textarea:focus { border-color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--gray);
+    padding: 40px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  footer .logo { font-size: 1.4rem; }
+
+  footer p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* ══════════════════════════════
+     ADMIN PANEL (MODAL)
+  ══════════════════════════════ */
+  .modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 500;
+    overflow-y: auto;
+    padding: 40px 20px;
+  }
+
+  .modal-bg.active { display: flex; align-items: flex-start; justify-content: center; }
+
+  /* LOGIN */
+  .login-box {
+    background: var(--gray);
+    border: 1px solid var(--border);
+    padding: 56px 48px;
+    width: 100%;
+    max-width: 440px;
+    margin: auto;
+    position: relative;
+  }
+
+  .login-box h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  .login-box p { color: var(--muted); font-size: 0.85rem; margin-bottom: 36px; }
+
+  .login-box .form-field { margin-bottom: 16px; }
+
+  .login-error {
+    background: rgba(255,60,0,0.1);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 10px 14px;
+    font-size: 0.8rem;
+    margin-top: 8px;
+    display: none;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.4rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--white); }
+
+  /* DASHBOARD */
+  .dashboard-box {
+    background: var(--gray);
+    border: 1px solid var(--border);
+    width: 100%;
+    max-width: 960px;
+    margin: auto;
+    position: relative;
+  }
+
+  .dash-header {
+    background: var(--black);
+    padding: 24px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dash-header h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+  }
+
+  .dash-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dash-tab {
+    padding: 14px 28px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s;
+  }
+
+  .dash-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .dash-body { padding: 36px; }
+
+  .dash-panel { display: none; }
+  .dash-panel.active { display: block; }
+
+  /* Add Design Form */
+  .add-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  .full-col { grid-column: 1 / -1; }
+
+  .img-upload-zone {
+    border: 2px dashed var(--border);
+    aspect-ratio: 16/9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    gap: 12px;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .img-upload-zone:hover { border-color: var(--accent); }
+
+  .img-upload-zone span {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .img-upload-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+    display: none;
+  }
+
+  /* Design List */
+  .designs-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .designs-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .designs-table td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.85rem;
+    vertical-align: middle;
+  }
+
+  .designs-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .td-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+  }
+
+  .td-thumb {
+    width: 60px;
+    height: 44px;
+    object-fit: cover;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    color: var(--muted);
+    overflow: hidden;
+  }
+
+  .td-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  .td-cat {
+    display: inline-block;
+    padding: 3px 8px;
+    background: rgba(255,60,0,0.15);
+    color: var(--accent);
+    font-size: 0.65rem;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .del-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 5px 10px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    transition: all 0.2s;
+  }
+
+  .del-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .dash-empty {
+    text-align: center;
+    padding: 60px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+  }
+
+  /* Settings */
+  .settings-grid { display: grid; gap: 20px; }
+
+  .success-msg {
+    background: rgba(0,200,100,0.1);
+    border: 1px solid #00c864;
+    color: #00c864;
+    padding: 10px 14px;
+    font-size: 0.8rem;
+    font-family: 'Space Mono', monospace;
+    display: none;
+    margin-top: 12px;
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-bar {
+    background: var(--accent);
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .marquee-inner {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+  }
+
+  .marquee-inner span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 4px;
+    color: var(--white);
+    padding: 0 40px;
+    opacity: 0.9;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.25s; }
+  .delay-3 { animation-delay: 0.4s; }
+  .delay-4 { animation-delay: 0.55s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    nav ul { gap: 16px; }
+    section, #about { padding: 80px 20px; }
+    #home { padding: 0 20px; }
+    h1 { font-size: clamp(52px, 14vw, 90px); }
+    .hero-stats { display: none; }
+    #about { grid-template-columns: 1fr; }
+    .about-img { max-height: 400px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .add-form-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="logo">DESIGN<span>BD</span></div>
+  <ul>
+    <li><a onclick="scrollTo('home')">Home</a></li>
+    <li><a onclick="scrollTo('portfolio')">Work</a></li>
+    <li><a onclick="scrollTo('about')">About</a></li>
+    <li><a onclick="scrollTo('contact')">Contact</a></li>
+    <li><a class="nav-admin-btn" onclick="openAdmin()">Admin</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="home">
+  <div class="hero-bg-text">DESIGN</div>
+  <div class="hero-content">
+    <div class="hero-tag fade-up">Available for Projects — 2025</div>
+    <h1 class="fade-up delay-1">
+      Creative<br>
+      <em>Studio.</em>
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      Visual storytelling through bold typography, motion, and brand identity. 
+      Every pixel crafted with intention.
+    </p>
+    <div class="hero-cta fade-up delay-3">
+      <a class="btn-primary" onclick="scrollTo('portfolio')">View Work</a>
+      <a class="btn-outline" onclick="scrollTo('contact')">Let's Talk</a>
+    </div>
+  </div>
+  <div class="hero-stats fade-up delay-4">
+    <div class="stat">
+      <div class="stat-num" id="proj-count">0</div>
+      <div class="stat-label">Projects</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">Years</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">98%</div>
+      <div class="stat-label">Satisfied</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    <span>BRAND IDENTITY</span><span>•</span>
+    <span>UI / UX DESIGN</span><span>•</span>
+    <span>MOTION GRAPHICS</span><span>•</span>
+    <span>ILLUSTRATION</span><span>•</span>
+    <span>PRINT DESIGN</span><span>•</span>
+    <span>TYPOGRAPHY</span><span>•</span>
+    <span>BRAND IDENTITY</span><span>•</span>
+    <span>UI / UX DESIGN</span><span>•</span>
+    <span>MOTION GRAPHICS</span><span>•</span>
+    <span>ILLUSTRATION</span><span>•</span>
+    <span>PRINT DESIGN</span><span>•</span>
+    <span>TYPOGRAPHY</span><span>•</span>
+  </div>
+</div>
+
+<!-- ══ PORTFOLIO ══ -->
+<section id="portfolio">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Selected Work</div>
+      <h2>Portfolio</h2>
+    </div>
+    <div class="section-count" id="portfolio-count">— 00 Projects</div>
+  </div>
+
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active" onclick="filterWork('all')">All</button>
+    <button class="filter-btn" onclick="filterWork('Branding')">Branding</button>
+    <button class="filter-btn" onclick="filterWork('UI/UX')">UI / UX</button>
+    <button class="filter-btn" onclick="filterWork('Illustration')">Illustration</button>
+    <button class="filter-btn" onclick="filterWork('Print')">Print</button>
+    <button class="filter-btn" onclick="filterWork('Motion')">Motion</button>
+  </div>
+
+  <div class="portfolio-grid" id="portfolio-grid">
+    <!-- populated by JS -->
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="about-img">
+    <div class="about-img-inner">STUDIO</div>
+  </div>
+  <div class="about-text">
+    <div class="section-label">Who I Am</div>
+    <h2>Crafting<br>Visual<br>Worlds</h2>
+    <p class="about-desc">
+      I'm a graphic designer with over 5 years of experience turning ideas into
+      compelling visual experiences. From startups to established brands, I help
+      clients communicate with clarity and impact.
+    </p>
+    <div class="skills-list">
+      <div class="skill-item"><div class="skill-dot"></div>Brand Identity</div>
+      <div class="skill-item"><div class="skill-dot"></div>UI / UX Design</div>
+      <div class="skill-item"><div class="skill-dot"></div>Motion Graphics</div>
+      <div class="skill-item"><div class="skill-dot"></div>Illustration</div>
+      <div class="skill-item"><div class="skill-dot"></div>Print & Packaging</div>
+      <div class="skill-item"><div class="skill-dot"></div>Typography</div>
+    </div>
+    <a class="btn-primary" onclick="scrollTo('contact')">Get In Touch</a>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Let's Work Together</div>
+      <h2>Contact</h2>
+    </div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Start a Project</h3>
+      <p>Have an idea? Let's bring it to life. Reach out and we'll figure out how to make something remarkable together.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:hello@vizart.studio">
+          <div class="contact-icon">@</div>
+          hello@vizart.studio
+        </a>
+        <a class="contact-link" href="https://drive.google.com" target="_blank">
+          <div class="contact-icon">▲</div>
+          Google Drive Portfolio
+        </a>
+        <a class="contact-link" href="#">
+          <div class="contact-icon">in</div>
+          LinkedIn Profile
+        </a>
+        <a class="contact-link" href="#">
+          <div class="contact-icon">ig</div>
+          @vizart.studio
+        </a>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-field">
+        <label>Your Name</label>
+        <input type="text" placeholder="Alex Johnson">
+      </div>
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" placeholder="alex@example.com">
+      </div>
+      <div class="form-field">
+        <label>Message</label>
+        <textarea rows="5" placeholder="Tell me about your project..."></textarea>
+      </div>
+      <button class="btn-primary" style="width:fit-content">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="logo">DESIGN<span>BD</span></div>
+  <p>© 2026 DESIGNBD Creative Studio — All rights reserved</p>
+  <p>Crafted with precision</p>
+</footer>
+
+<!-- ══════════════════════════
+     ADMIN MODAL
+══════════════════════════ -->
+<div class="modal-bg" id="admin-modal">
+
+  <!-- LOGIN SCREEN -->
+  <div class="login-box" id="login-box">
+    <button class="modal-close" onclick="closeAdmin()">✕</button>
+    <div class="section-label">Admin Panel</div>
+    <h2>Sign In</h2>
+    <p>Enter your credentials to manage portfolio content.</p>
+    <div class="form-field">
+      <label>User ID</label>
+      <input type="text" id="login-user" placeholder="admin" autocomplete="off">
+    </div>
+    <div class="form-field">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="••••••••">
+    </div>
+    <div class="login-error" id="login-error">⚠ Invalid credentials. Try again.</div>
+    <br>
+    <button class="btn-primary" style="width:100%;margin-top:8px" onclick="doLogin()">Login →</button>
+    <br>
+    <p style="margin-top:16px;font-size:0.75rem;color:var(--muted);font-family:'Space Mono',monospace">
+      Default: admin / admin123
+    </p>
+  </div>
+
+  <!-- DASHBOARD SCREEN -->
+  <div class="dashboard-box" id="dashboard-box" style="display:none">
+    <div class="dash-header">
+      <h3>⚡ Dashboard</h3>
+      <div style="display:flex;gap:12px;align-items:center">
+        <span style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted)">Logged in as <strong style="color:var(--accent)" id="logged-user"></strong></span>
+        <button class="btn-outline" style="padding:8px 16px;font-size:0.7rem" onclick="doLogout()">Logout</button>
+        <button class="modal-close" style="position:static" onclick="closeAdmin()">✕</button>
+      </div>
+    </div>
+
+    <div class="dash-tabs">
+      <button class="dash-tab active" onclick="switchTab('add')">+ Add Design</button>
+      <button class="dash-tab" onclick="switchTab('manage')">Manage Work</button>
+      <button class="dash-tab" onclick="switchTab('settings')">Settings</button>
+    </div>
+
+    <div class="dash-body">
+
+      <!-- ADD DESIGN -->
+      <div class="dash-panel active" id="tab-add">
+        <div class="add-form-grid">
+          <div class="form-field full-col">
+            <label>Design Preview Image</label>
+            <div class="img-upload-zone" id="upload-zone">
+              <img class="preview-img" id="preview-img" alt="Preview">
+              <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:var(--muted)"><path d="M12 16V8m-4 4 4-4 4 4"/><path d="M20 16v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2"/></svg>
+              <span>Click to upload image</span>
+              <input type="file" accept="image/*" onchange="previewImage(this)">
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label>Project Title</label>
+            <input type="text" id="new-title" placeholder="Brand Identity 2025">
+          </div>
+
+          <div class="form-field">
+            <label>Category</label>
+            <select id="new-category" style="background:var(--gray);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;width:100%">
+              <option value="Branding">Branding</option>
+              <option value="UI/UX">UI / UX</option>
+              <option value="Illustration">Illustration</option>
+              <option value="Print">Print</option>
+              <option value="Motion">Motion</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label>Download Link (Direct URL)</label>
+            <input type="url" id="new-download" placeholder="https://files.example.com/design.zip">
+          </div>
+
+          <div class="form-field">
+            <label>Google Drive Link</label>
+            <input type="url" id="new-drive" placeholder="https://drive.google.com/file/d/...">
+          </div>
+
+          <div class="form-field full-col">
+            <label>Description</label>
+            <textarea id="new-desc" rows="3" style="background:var(--gray);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;resize:none;width:100%" placeholder="Brief project description..."></textarea>
+          </div>
+        </div>
+
+        <button class="btn-primary" onclick="addDesign()">Add to Portfolio →</button>
+        <div class="success-msg" id="add-success">✓ Design added successfully!</div>
+      </div>
+
+      <!-- MANAGE -->
+      <div class="dash-panel" id="tab-manage">
+        <div id="manage-content"><!-- populated by JS --></div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="dash-panel" id="tab-settings">
+        <div class="settings-grid">
+          <div class="form-field">
+            <label>Designer Name</label>
+            <input type="text" id="s-name" value="VIZART Studio" style="background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-family:'Outfit',sans-serif;outline:none;width:100%">
+          </div>
+          <div class="form-field">
+            <label>Contact Email</label>
+            <input type="email" id="s-email" value="hello@vizart.studio" style="background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-family:'Outfit',sans-serif;outline:none;width:100%">
+          </div>
+          <div class="form-field">
+            <label>Change Admin User ID</label>
+            <input type="text" id="s-userid" placeholder="New user ID" style="background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-family:'Outfit',sans-serif;outline:none;width:100%">
+          </div>
+          <div class="form-field">
+            <label>Change Admin Password</label>
+            <input type="password" id="s-pass" placeholder="New password" style="background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-family:'Outfit',sans-serif;outline:none;width:100%">
+          </div>
+          <div>
+            <button class="btn-primary" onclick="saveSettings()">Save Settings</button>
+            <div class="success-msg" id="settings-success" style="display:none;margin-top:12px">✓ Settings saved!</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     JAVASCRIPT
+══════════════════════════ -->
+<script>
+// ── STATE ──────────────────
+let credentials = { user: 'admin', pass: 'admin123' };
+let currentFilter = 'all';
+let uploadedImgDataUrl = null;
+
+// Default sample designs
+let designs = [
+  {
+    id: 1,
+    title: 'Noir Collective',
+    category: 'Branding',
+    desc: 'Complete brand identity for a luxury streetwear label.',
+    downloadUrl: '#',
+    driveUrl: 'https://drive.google.com',
+    color: '#1a1a2e',
+    accent: '#e94560',
+    imgData: null,
+  },
+  {
+    id: 2,
+    title: 'Aether Dashboard',
+    category: 'UI/UX',
+    desc: 'SaaS analytics platform UI design system.',
+    downloadUrl: '#',
+    driveUrl: 'https://drive.google.com',
+    color: '#0f2027',
+    accent: '#2196f3',
+    imgData: null,
+  },
+  {
+    id: 3,
+    title: 'Flora Series',
+    category: 'Illustration',
+    desc: 'Botanical illustration series for book covers.',
+    downloadUrl: '#',
+    driveUrl: 'https://drive.google.com',
+    color: '#1b4332',
+    accent: '#95d5b2',
+    imgData: null,
+  },
+  {
+    id: 4,
+    title: 'Tempo Magazine',
+    category: 'Print',
+    desc: 'Editorial layout design for an arts & culture publication.',
+    downloadUrl: '#',
+    driveUrl: 'https://drive.google.com',
+    color: '#2d1b69',
+    accent: '#f9ca24',
+    imgData: null,
+  },
+  {
+    id: 5,
+    title: 'Pulse Motion',
+    category: 'Motion',
+    desc: 'Brand animation system for a fintech startup.',
+    downloadUrl: '#',
+    driveUrl: 'https://drive.google.com',
+    color: '#3d0000',
+    accent: '#ff6b6b',
+    imgData: null,
+  },
+  {
+    id: 6,
+    title: 'Solstice Mark',
+    category: 'Branding',
+    desc: 'Logo and visual identity for a wellness brand.',
+    downloadUrl: '#',
+    driveUrl: 'https://drive.google.com',
+    color: '#1a1200',
+    accent: '#ffd000',
+    imgData: null,
+  },
+];
+
+let nextId = 7;
+
+// ── RENDER PORTFOLIO ────────
+function renderPortfolio() {
+  const grid = document.getElementById('portfolio-grid');
+  const filtered = currentFilter === 'all'
+    ? designs
+    : designs.filter(d => d.category === currentFilter);
+
+  document.getElementById('portfolio-count').textContent =
+    `— ${String(filtered.length).padStart(2,'0')} Projects`;
+  document.getElementById('proj-count').textContent = designs.length;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;padding:80px;text-align:center;color:var(--muted);font-family:'Space Mono',monospace;font-size:0.8rem;letter-spacing:2px">NO PROJECTS IN THIS CATEGORY</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map((d, i) => `
+    <div class="portfolio-item" data-cat="${d.category}" style="animation:fadeUp 0.5s ease ${i*0.07}s both">
+      ${d.imgData
+        ? `<img class="thumb" src="${d.imgData}" alt="${d.title}">`
+        : `<div class="img-placeholder" style="background:${d.color};flex-direction:column;gap:12px">
+             <div style="font-size:3rem;color:${d.accent};opacity:0.5">${getIcon(d.category)}</div>
+             <div style="color:${d.accent};opacity:0.3;font-size:0.7rem;letter-spacing:4px">${d.category.toUpperCase()}</div>
+           </div>`
+      }
+      <div class="item-overlay">
+        <div class="item-num">${String(i+1).padStart(2,'0')}</div>
+        <div class="item-category">${d.category}</div>
+        <div class="item-title">${d.title}</div>
+        <div class="item-actions">
+          ${d.downloadUrl && d.downloadUrl !== '#'
+            ? `<a class="item-btn btn-dl" href="${d.downloadUrl}" download target="_blank">
+                ↓ Download
+               </a>`
+            : `<button class="item-btn btn-dl" onclick="alert('No download link set for this project.')">↓ Download</button>`
+          }
+          ${d.driveUrl && d.driveUrl !== '#'
+            ? `<a class="item-btn btn-drive" href="${d.driveUrl}" target="_blank">▲ Drive</a>`
+            : `<button class="item-btn btn-drive" onclick="alert('No Google Drive link set.')">▲ Drive</button>`
+          }
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function getIcon(cat) {
+  return {Branding:'◈',['UI/UX']:'⬡',Illustration:'◌',Print:'▬',Motion:'▷'}[cat] || '◉';
+}
+
+// ── FILTER ─────────────────
+function filterWork(cat) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderPortfolio();
+}
+
+// ── SCROLL HELPER ──────────
+function scrollTo(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── ADMIN ──────────────────
+function openAdmin() {
+  document.getElementById('admin-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAdmin() {
+  document.getElementById('admin-modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function doLogin() {
+  const u = document.getElementById('login-user').value.trim();
+  const p = document.getElementById('login-pass').value;
+  if (u === credentials.user && p === credentials.pass) {
+    document.getElementById('login-box').style.display = 'none';
+    document.getElementById('dashboard-box').style.display = 'block';
+    document.getElementById('logged-user').textContent = u;
+    document.getElementById('login-error').style.display = 'none';
+    renderManage();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+
+function doLogout() {
+  document.getElementById('login-box').style.display = 'block';
+  document.getElementById('dashboard-box').style.display = 'none';
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-pass').value = '';
+}
+
+document.getElementById('login-pass').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+
+// ── TABS ───────────────────
+function switchTab(tab) {
+  document.querySelectorAll('.dash-tab').forEach((b,i) => {
+    b.classList.toggle('active', ['add','manage','settings'][i] === tab);
+  });
+  document.querySelectorAll('.dash-panel').forEach((p,i) => {
+    p.classList.toggle('active', ['tab-add','tab-manage','tab-settings'][i] === `tab-${tab}`);
+  });
+  if (tab === 'manage') renderManage();
+}
+
+// ── IMAGE UPLOAD ────────────
+function previewImage(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    uploadedImgDataUrl = e.target.result;
+    const img = document.getElementById('preview-img');
+    img.src = e.target.result;
+    img.style.display = 'block';
+    document.querySelector('#upload-zone svg').style.display = 'none';
+    document.querySelector('#upload-zone span').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── ADD DESIGN ─────────────
+function addDesign() {
+  const title = document.getElementById('new-title').value.trim();
+  const cat   = document.getElementById('new-category').value;
+  const dl    = document.getElementById('new-download').value.trim();
+  const drive = document.getElementById('new-drive').value.trim();
+  const desc  = document.getElementById('new-desc').value.trim();
+
+  if (!title) { alert('Please enter a project title.'); return; }
+
+  const PALETTE = [
+    {bg:'#1a1a2e',ac:'#e94560'},{bg:'#0f2027',ac:'#2196f3'},
+    {bg:'#1b4332',ac:'#95d5b2'},{bg:'#2d1b69',ac:'#f9ca24'},
+    {bg:'#3d0000',ac:'#ff6b6b'},{bg:'#1a1200',ac:'#ffd000'},
+  ];
+  const p = PALETTE[nextId % PALETTE.length];
+
+  designs.unshift({
+    id: nextId++,
+    title,
+    category: cat,
+    desc: desc || 'Design project.',
+    downloadUrl: dl || '#',
+    driveUrl: drive || '#',
+    color: p.bg,
+    accent: p.ac,
+    imgData: uploadedImgDataUrl,
+  });
+
+  renderPortfolio();
+  renderManage();
+
+  // Reset form
+  document.getElementById('new-title').value = '';
+  document.getElementById('new-download').value = '';
+  document.getElementById('new-drive').value = '';
+  document.getElementById('new-desc').value = '';
+  document.getElementById('preview-img').style.display = 'none';
+  document.querySelector('#upload-zone svg').style.display = 'block';
+  document.querySelector('#upload-zone span').style.display = 'block';
+  uploadedImgDataUrl = null;
+
+  const msg = document.getElementById('add-success');
+  msg.style.display = 'block';
+  setTimeout(() => msg.style.display = 'none', 3000);
+}
+
+// ── MANAGE TABLE ───────────
+function renderManage() {
+  const el = document.getElementById('manage-content');
+  if (designs.length === 0) {
+    el.innerHTML = '<div class="dash-empty">NO DESIGNS YET — ADD SOME!</div>';
+    return;
+  }
+  el.innerHTML = `
+    <table class="designs-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Preview</th>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Download</th>
+          <th>Drive</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${designs.map((d,i) => `
+          <tr>
+            <td class="td-num">${String(i+1).padStart(2,'0')}</td>
+            <td>
+              <div class="td-thumb" style="background:${d.color}">
+                ${d.imgData
+                  ? `<img src="${d.imgData}" alt="">`
+                  : `<span style="color:${d.accent}">${getIcon(d.category)}</span>`
+                }
+              </div>
+            </td>
+            <td style="font-weight:500">${d.title}</td>
+            <td><span class="td-cat">${d.category}</span></td>
+            <td style="font-size:0.75rem;color:var(--muted)">${d.downloadUrl !== '#' ? '✓ Set' : '— None'}</td>
+            <td style="font-size:0.75rem;color:var(--muted)">${d.driveUrl !== '#' ? '✓ Set' : '— None'}</td>
+            <td><button class="del-btn" onclick="deleteDesign(${d.id})">Delete</button></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+function deleteDesign(id) {
+  if (!confirm('Remove this design from portfolio?')) return;
+  designs = designs.filter(d => d.id !== id);
+  renderPortfolio();
+  renderManage();
+}
+
+// ── SETTINGS ───────────────
+function saveSettings() {
+  const u = document.getElementById('s-userid').value.trim();
+  const p = document.getElementById('s-pass').value;
+  if (u) credentials.user = u;
+  if (p) credentials.pass = p;
+  const msg = document.getElementById('settings-success');
+  msg.style.display = 'block';
+  setTimeout(() => msg.style.display = 'none', 3000);
+}
+
+// ── INIT ───────────────────
+renderPortfolio();
+</script>
+</body>
+</html>
